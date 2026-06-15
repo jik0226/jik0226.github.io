@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>정인겸 | Portfolio</title>
+  <meta name="description" content="정인겸 — 동양미래대학교 컴퓨터소프트웨어공학과, 정보보안 지망 개발자 포트폴리오" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0c10;
+      --bg-soft: #11141b;
+      --card: #141821;
+      --border: #232836;
+      --text: #e6e9ef;
+      --muted: #8b93a7;
+      --accent: #38bdf8;
+      --accent-2: #818cf8;
+      --glow: rgba(56, 189, 248, 0.15);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Noto Sans KR", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    code, .mono { font-family: "JetBrains Mono", monospace; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(10, 12, 16, 0.72);
+      border-bottom: 1px solid var(--border);
+    }
+    nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { font-weight: 900; font-size: 1.05rem; letter-spacing: -0.5px; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: var(--muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      position: relative;
+      background:
+        radial-gradient(600px circle at 75% 30%, var(--glow), transparent 60%),
+        radial-gradient(500px circle at 15% 80%, rgba(129,140,248,0.10), transparent 60%);
+    }
+    .hero .eyebrow {
+      font-family: "JetBrains Mono", monospace; color: var(--accent);
+      font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 18px;
+    }
+    .hero h1 { font-size: clamp(2.4rem, 7vw, 4.2rem); font-weight: 900; letter-spacing: -2px; line-height: 1.1; }
+    .hero h1 .grad {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero p.sub { margin-top: 22px; font-size: clamp(1rem, 2.4vw, 1.15rem); color: var(--muted); max-width: 560px; }
+    .hero .cta { margin-top: 38px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 10px; font-weight: 700; font-size: 0.92rem;
+      transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+    }
+    .btn-primary { background: var(--accent); color: #04121c; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--glow); }
+    .btn-ghost { border: 1px solid var(--border); color: var(--text); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* SECTION */
+    section { padding: 96px 0; }
+    .section-tag {
+      font-family: "JetBrains Mono", monospace; color: var(--accent);
+      font-size: 0.82rem; letter-spacing: 1.5px; margin-bottom: 10px;
+    }
+    .section-title { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 40px; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
+    @media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; gap: 28px; } }
+    .about p { color: var(--muted); margin-bottom: 16px; }
+    .about p strong { color: var(--text); font-weight: 700; }
+    .facts { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
+    .fact { display: flex; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
+    .fact:last-child { border-bottom: none; }
+    .fact .k { color: var(--accent); min-width: 64px; font-weight: 700; font-size: 0.82rem; font-family: "JetBrains Mono", monospace; padding-top: 2px; }
+    .fact .v { color: var(--text); }
+
+    /* SKILLS */
+    .skill-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; }
+    .skill-card h3 { font-size: 0.95rem; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .skill-card h3 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-family: "JetBrains Mono", monospace; font-size: 0.78rem; font-weight: 500;
+      padding: 6px 12px; border-radius: 8px; background: var(--bg-soft);
+      border: 1px solid var(--border); color: var(--muted);
+    }
+
+    /* PROJECTS */
+    .projects { display: grid; gap: 20px; }
+    .project {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 28px 30px; transition: transform 0.18s, border-color 0.2s;
+    }
+    .project:hover { transform: translateY(-3px); border-color: var(--accent); }
+    .project-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+    .project h3 { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.5px; }
+    .project .role { font-family: "JetBrains Mono", monospace; font-size: 0.76rem; color: var(--accent-2); white-space: nowrap; }
+    .project .desc { color: var(--muted); margin: 14px 0 16px; font-size: 0.95rem; }
+    .project .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .project .tech { font-family: "JetBrains Mono", monospace; font-size: 0.74rem; padding: 5px 10px; border-radius: 7px; background: var(--bg-soft); border: 1px solid var(--border); color: var(--muted); }
+    .project .links { display: flex; gap: 16px; align-items: center; }
+    .project .links a { font-size: 0.84rem; font-weight: 600; color: var(--accent); display: inline-flex; align-items: center; gap: 5px; }
+    .project .links a:hover { text-decoration: underline; }
+    .badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 999px;
+      background: rgba(56,189,248,0.12); color: var(--accent); border: 1px solid rgba(56,189,248,0.3);
+      margin-bottom: 10px; font-family: "JetBrains Mono", monospace;
+    }
+    .badge.gray { background: var(--bg-soft); color: var(--muted); border-color: var(--border); }
+
+    /* CONTACT */
+    .contact { text-align: center; }
+    .contact .section-title { margin-bottom: 16px; }
+    .contact p { color: var(--muted); max-width: 480px; margin: 0 auto 32px; }
+    .contact-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--muted); font-size: 0.82rem; }
+    footer .mono { color: var(--muted); }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.show { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="logo">JIK<span>.</span></div>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <div class="eyebrow">WELCOME TO MY PORTFOLIO</div>
+      <h1>안녕하세요,<br /><span class="grad">정인겸</span>입니다</h1>
+      <p class="sub">동양미래대학교 컴퓨터소프트웨어공학과에서 공부하며, 정보보안 분야를 목표로 매일 한 걸음씩 나아가는 개발자입니다.</p>
+      <div class="cta">
+        <a href="#projects" class="btn btn-primary">프로젝트 보기 →</a>
+        <a href="#contact" class="btn btn-ghost">연락하기</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="wrap">
+      <div class="section-tag">01 / ABOUT</div>
+      <h2 class="section-title">About Me</h2>
+      <div class="about-grid">
+        <div>
+          <p>어려운 문제를 만나면 원인부터 차근차근 분석하고, 해결해 나가는 과정 자체를 즐깁니다. 군 복무 동안 <strong>보안업무담당관</strong>으로 일하며 가졌던 보안에 대한 관심을, 이제는 직접 코드로 풀어내고 있습니다.</p>
+          <p>현재는 <strong>웹·모바일·AI</strong>를 넘나들며 다양한 프로젝트를 만들고 있고, 최종 목표는 <strong>정보보안 전문가</strong>로 성장하는 것입니다. 리눅스마스터부터 정보보안기사까지, 자격증 로드맵을 따라 기초를 단단히 다지는 중입니다.</p>
+        </div>
+        <div class="facts">
+          <div class="fact"><span class="k">학력</span><span class="v">동양미래대학교<br />컴퓨터소프트웨어공학과 재학</span></div>
+          <div class="fact"><span class="k">경력</span><span class="v">前 육군 보안업무담당관 (중사)</span></div>
+          <div class="fact"><span class="k">관심</span><span class="v">정보보안 · 백엔드 · AI 응용</span></div>
+          <div class="fact"><span class="k">위치</span><span class="v">대한민국, 경기</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-tag">02 / SKILLS</div>
+      <h2 class="section-title">Tech Stack</h2>
+      <div class="skill-groups">
+        <div class="skill-card">
+          <h3><span class="dot"></span>Languages</h3>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">Kotlin</span>
+            <span class="chip">Swift</span>
+            <span class="chip">Java</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3><span class="dot"></span>Web &amp; Backend</h3>
+          <div class="chips">
+            <span class="chip">React</span>
+            <span class="chip">Node.js</span>
+            <span class="chip">FastAPI</span>
+            <span class="chip">HTML/CSS</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3><span class="dot"></span>Mobile</h3>
+          <div class="chips">
+            <span class="chip">SwiftUI</span>
+            <span class="chip">Jetpack Compose</span>
+            <span class="chip">SwiftData</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3><span class="dot"></span>AI &amp; Tools</h3>
+          <div class="chips">
+            <span class="chip">GPT-4o</span>
+            <span class="chip">Claude API</span>
+            <span class="chip">Clova OCR</span>
+            <span class="chip">Git</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-tag">03 / PROJECTS</div>
+      <h2 class="section-title">Projects</h2>
+      <div class="projects">
+
+        <article class="project">
+          <span class="badge">솜커톤 2026 대상</span>
+          <div class="project-head">
+            <h3>민원해줘 — AI 행정 도우미</h3>
+            <span class="role">PM · 5인 팀</span>
+          </div>
+          <p class="desc">민원 내용을 입력하면 AI가 알맞은 행정 서류와 절차를 안내하고 작성을 보조하는 서비스. 기획·일정 관리·발표를 맡았습니다.</p>
+          <div class="meta">
+            <span class="tech">React</span><span class="tech">Node.js</span><span class="tech">GPT-4o</span><span class="tech">Clova OCR</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/jik0226/2026_Somkathon_Minwonhaejwo" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <span class="badge">INCOGNITO 2026 최우수상</span>
+          <div class="project-head">
+            <h3>PrivacyScan — 개인정보처리방침 위험도 평가</h3>
+            <span class="role">기획 · 백엔드 · 2인 팀</span>
+          </div>
+          <p class="desc">웹사이트의 개인정보처리방침을 AI로 분석해 위험 요소를 자동 탐지하고 점수화하는 도구. 백엔드 설계와 기획을 담당했습니다.</p>
+          <div class="meta">
+            <span class="tech">FastAPI</span><span class="tech">React</span><span class="tech">GPT-4o mini</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/jik0226/2026_Incognito_PrivacyScan" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <span class="badge gray">개인 · 진행 중</span>
+          <div class="project-head">
+            <h3>Gadi — 모바일 AI 에이전트</h3>
+            <span class="role">1인 개발</span>
+          </div>
+          <p class="desc">화면 위를 떠다니는 펫 마스코트가 알림을 분류하고, 자연어 명령에 따라 폰 UI를 직접 조작하는 안드로이드 에이전트. Computer Use의 모바일 버전을 지향합니다.</p>
+          <div class="meta">
+            <span class="tech">Kotlin</span><span class="tech">Jetpack Compose</span><span class="tech">Claude API</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/jik0226/gadi" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <span class="badge gray">개인 · 진행 중</span>
+          <div class="project-head">
+            <h3>SJ (Study J) — iOS 학습 동반자 앱</h3>
+            <span class="role">1인 개발</span>
+          </div>
+          <p class="desc">종이 플래너의 10분 블록 그리드를 디지털로 옮기고, 수학 함수로 자라는 식물 마스코트가 학습·운동 시간을 영양분으로 받는 iOS 앱. 약 5,400줄 / 49개 단위 테스트 통과.</p>
+          <div class="meta">
+            <span class="tech">Swift</span><span class="tech">SwiftUI</span><span class="tech">SwiftData</span><span class="tech">WidgetKit</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/jik0226/SJ" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="section-tag">04 / CONTACT</div>
+      <h2 class="section-title">함께 이야기해요</h2>
+      <p>협업, 채용, 또는 궁금한 점이 있다면 언제든 편하게 연락 주세요.</p>
+      <div class="contact-btns">
+        <a href="mailto:jik0226@naver.com" class="btn btn-primary">✉ jik0226@naver.com</a>
+        <a href="https://github.com/jik0226" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p class="mono">© 2026 정인겸 · Built with HTML &amp; CSS</p>
+    </div>
+  </footer>
+
+  <script>
+    // 스크롤 등장 애니메이션
+    const items = document.querySelectorAll("section .wrap > *, .project, .skill-card, .facts");
+    items.forEach((el) => el.classList.add("reveal"));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    items.forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>
